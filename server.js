@@ -1,7 +1,9 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const connectDB = require('./config/db');
-const categoryRoutes = require('./routes/categories');
+const categoriesRoute = require('./routes/categories');
+const brandsRoute = require('./routes/brands');
+const productsRoute = require('./routes/products');
 const errorHandler = require('./middlewares/errorHandler');
 
 dotenv.config({path: './config/config.env'});
@@ -14,7 +16,9 @@ app.use(express.json());
 connectDB(DB_CONN_STRING);
 
 //Add server routes
-app.use('/api/categories', categoryRoutes);
+app.use('/api/products/categories', categoriesRoute);
+app.use('/api/products/brands', brandsRoute);
+app.use('/api/products', productsRoute);
 //Hook error handler
 app.use(errorHandler);
 
