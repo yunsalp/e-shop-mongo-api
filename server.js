@@ -4,6 +4,8 @@ const connectDB = require('./config/db');
 const categoriesRoute = require('./routes/categories');
 const brandsRoute = require('./routes/brands');
 const productsRoute = require('./routes/products');
+const customersRoute = require('./routes/customers');
+const ordersRoute = require('./routes/orders');
 const errorHandler = require('./middlewares/errorHandler');
 
 dotenv.config({path: './config/config.env'});
@@ -19,6 +21,8 @@ connectDB(DB_CONN_STRING);
 app.use('/api/products/categories', categoriesRoute);
 app.use('/api/products/brands', brandsRoute);
 app.use('/api/products', productsRoute);
+app.use('/api/customers', customersRoute);
+app.use('/api/orders', ordersRoute);
 //Hook error handler
 app.use(errorHandler);
 

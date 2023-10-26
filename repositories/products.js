@@ -10,6 +10,11 @@ const getProductById = async (id) => {
     return product;
 }
 
+const getProductOfferPrice = async (id) => {
+    const priceObj = await Product.findById(id, 'offer_price -_id');
+    return priceObj.offer_price;
+}
+
 const createProduct = async (data) => {
     const newProduct = new Product(data);
     const result = await newProduct.save()
@@ -31,6 +36,7 @@ const deleteProduct = async (id) => {
 module.exports = {
     getAllProducts,
     getProductById,
+    getProductOfferPrice,
     createProduct,
     updateProduct,
     deleteProduct
