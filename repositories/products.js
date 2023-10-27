@@ -1,12 +1,13 @@
 const Product = require('../models/product');
 
+const populateQuery = ['category', 'brand'];
 const getAllProducts = async () => {
-    const products = await Product.find().populate(['category', 'brand']);
+    const products = await Product.find().populate(populateQuery);
     return products;
 }
 
 const getProductById = async (id) => {
-    const product = await Product.findById(id).populate(['category', 'brand']);
+    const product = await Product.findById(id).populate(populateQuery);
     return product;
 }
 
@@ -17,14 +18,14 @@ const getProductOfferPrice = async (id) => {
 
 const createProduct = async (data) => {
     const newProduct = new Product(data);
-    const result = await newProduct.save()
-    const createdProduct = Product.findById(result._id).populate(['category', 'brand']);
+    const result = await newProduct.save();
+    const createdProduct = Product.findById(result._id).populate(populateQuery);
     return createdProduct;
 }
 
 const updateProduct = async (id, data) => {
-    const result = await Product.findByIdAndUpdate(id, data);
-    const updatedProduct = await Product.findById(id).populate(['category', 'brand']);
+    const updatedProduct = await Product.findByIdAndUpdate(id, data, {new: true, runValidators: true})
+                                        .populate(populateQuery);
     return updatedProduct;
 }
 

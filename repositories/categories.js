@@ -17,8 +17,7 @@ async function createCategory(data) {
 }
 
 async function updateCategory(id, data) {
-    const result = await Category.findByIdAndUpdate(id, data);
-    const updatedData = await Category.findById(id);
+    const updatedData = await Category.findByIdAndUpdate(id, data, {new: true, runValidators: true});
     return updatedData;
 }
 

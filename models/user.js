@@ -20,8 +20,8 @@ const addressSchema = new mongoose.Schema({
     }
 });
 
-const customerSchema = new mongoose.Schema({
-    name: {
+const userSchema = new mongoose.Schema({
+    full_name: {
         required: true,
         type: String
     },
@@ -38,7 +38,21 @@ const customerSchema = new mongoose.Schema({
     phone: {
         required: true,
         type: String
-    }
+    },
+    username: {
+        required: true,
+        unique: true,
+        type: String
+    },
+    password: {
+        required: true,
+        type: String
+    },
+    roles: [{
+        required: true,
+        type: String,
+        enum: ['admin', 'customer']
+    }]
 });
 
-module.exports = mongoose.model('Customer', customerSchema);
+module.exports = mongoose.model('User', userSchema);

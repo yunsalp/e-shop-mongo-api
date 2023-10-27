@@ -4,7 +4,7 @@ const connectDB = require('./config/db');
 const categoriesRoute = require('./routes/categories');
 const brandsRoute = require('./routes/brands');
 const productsRoute = require('./routes/products');
-const customersRoute = require('./routes/customers');
+const usersRoute = require('./routes/users');
 const ordersRoute = require('./routes/orders');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -21,7 +21,7 @@ connectDB(DB_CONN_STRING);
 app.use('/api/products/categories', categoriesRoute);
 app.use('/api/products/brands', brandsRoute);
 app.use('/api/products', productsRoute);
-app.use('/api/customers', customersRoute);
+app.use('/api/users', usersRoute);
 app.use('/api/orders', ordersRoute);
 //Hook error handler
 app.use(errorHandler);

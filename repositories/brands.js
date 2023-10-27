@@ -17,8 +17,7 @@ const createBrand = async (data) => {
 }
 
 const updateBrand = async (id, data) => {
-    const result = await Brand.findByIdAndUpdate(id, data);
-    const updatedData = await Brand.findById(id);
+    const updatedData = await Brand.findByIdAndUpdate(id, data, {new: true, runValidators: true});
     return updatedData;
 }
 
