@@ -32,7 +32,7 @@ const orderSchema = new mongoose.Schema({
 
 orderSchema.pre('save', async function (next) {
     // Check if the referenced customer exists
-    const customerExists = await User.exists({ _id: this.customer, roles: 'customer'});
+    const customerExists = await User.exists({ _id: this.customer, roles: 'Customer'});
     if (!customerExists) {
         const err = new ErrorResponse(`Referenced customer '${this.customer}' does not exist`, 400);
         return next(err);
@@ -52,7 +52,7 @@ orderSchema.pre('findOneAndUpdate', async function (next) {
     // Check if the referenced customer exists
     const newFieldValue = this._update.customer;
     if (newFieldValue) {
-        const customerExists = await User.exists({ _id: newFieldValue, roles: 'customer'});
+        const customerExists = await User.exists({ _id: newFieldValue, roles: 'Customer'});
         if (!customerExists) {
             const err = new ErrorResponse(`Referenced customer '${newFieldValue}' does not exist`, 400);
             return next(err);

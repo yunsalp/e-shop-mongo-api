@@ -15,6 +15,7 @@ const DB_CONN_STRING = process.env.DATABASE_URL;
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 connectDB(DB_CONN_STRING);
 
 //Add server routes

@@ -6,7 +6,8 @@ const ErrorResponse = require('../utils/errorResponse');
 const productSchema = new mongoose.Schema({
     title: {
         required: true,
-        type: String
+        type: String,
+        minlength: 3
     },
     category: {
         required: true,

@@ -1,12 +1,13 @@
 const express = require('express');
 const categoriesController = require('../controllers/categories');
+const {verifyTokenHandler, verifyRoles} = require('../middlewares/jwtHandler');
 
 const router = express.Router();
 
 router.get('/', categoriesController.getAllCategories);
 router.get('/:id', categoriesController.getCategoryById);
-router.post('/', categoriesController.createCategory);
-router.patch('/:id', categoriesController.updateCategory);
-router.delete('/:id', categoriesController.deleteCategory);
+router.post('/', [verifyTokenHandler, verifyRoles(['Admin'])], categoriesController.createCategory);
+router.patch('/:id', [verifyTokenHandler, verifyRoles(['Admin'])], categoriesController.updateCategory);
+router.delete('/:id', [verifyTokenHandler, verifyRoles(['Admin'])], categoriesController.deleteCategory);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 
 const populateQuery = ['category', 'brand'];
+
 const getAllProducts = async () => {
     const products = await Product.find().populate(populateQuery);
     return products;
@@ -19,7 +20,7 @@ const getProductOfferPrice = async (id) => {
 const createProduct = async (data) => {
     const newProduct = new Product(data);
     const result = await newProduct.save();
-    const createdProduct = Product.findById(result._id).populate(populateQuery);
+    const createdProduct = await Product.findById(result._id).populate(populateQuery);
     return createdProduct;
 }
 
